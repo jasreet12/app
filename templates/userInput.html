@@ -8,11 +8,15 @@
   <h1>
     Welcome to AIML
   </h1>
-<form action="{{ url_for("userInput")}}" method="post">
-<label for="firstname">First Name:</label>
-<input type="text" id="firstname" name="fname" placeholder="firstname">
-<label for="lastname">Last Name:</label>
-<input type="text" id="lastname" name="lname" placeholder="lastname">
+<form action="{{ url_for("methoduserInput")}}" method="post">
+<label for="city">City:</label>
+<input type="text" id="city" name="location" placeholder="location">
+<label for="size">Size(sqft)</label>
+<input type="text" id="size" name="size" placeholder="size">
+  <label for="bhk">BHK</label>
+<input type="text" id="bhk" name="bhk" placeholder="bhk">
+  <label for="bathroom">Bathroom</label>
+<input type="text" id="bathroom" name="broom" placeholder="bathroom">
 <button type="submit">Login</button>
 </form>
   {{pprice}}
