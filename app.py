@@ -36,9 +36,14 @@ def method1():
 @app.route('/contact')
 def methodcontact():
   return render_template("contact.html")
+@app.route('/userInput')
+def methoduserInput():
+  return render_template("userInput.html")
+
 
 # return " Welcome AIML Jan24 f1"
 
 if __name__ == '__main__':
   app.run()
+  
   
