@@ -1,6 +1,11 @@
 from flask import *
  
 app = Flask(__name__)
+###########
+file = "https://github.com/sarwansingh/Python/blob/master/ClassExamples/data/Bengaluru_House_Data_clean.csv"
+
+
+###########
 
 @app.route('/')
 def method1():
