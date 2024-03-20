@@ -30,7 +30,7 @@ def predictprice(location,sqft,bath,bhk):
 
 @app.route('/')
 def method1():
-  pp = predictprice('Kothanur', 1500, 3, 3).round(3)
+  pp = predictprice('Kothanur', 1300, 3, 3).round(3)
   return render_template("index.html" , pprice=pp)
 
 @app.route('/contact')
