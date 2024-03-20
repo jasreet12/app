@@ -36,20 +36,23 @@ def method1():
 @app.route('/contact')
 def methodcontact():
   return render_template("contact.html")
+
+
+
 @app.route('/userInput', methods =["GET", "POST"])
 def methoduserInput():
-  if request.method == "POST":
-       # getting input with name = fname in HTML form
-       loc = request.form.get("location")
-       # getting input with name = lname in HTML form 
-       size = request.form.get("size") 
-       bhk = request.form.get("bhk") 
-       bathroom = request.form.get("broom")
+#   if request.method == "POST":
+#        # getting input with name = fname in HTML form
+#        loc = request.form.get("location")
+#        # getting input with name = lname in HTML form 
+#        size = request.form.get("size") 
+#        bhk = request.form.get("bhk") 
+#        bathroom = request.form.get("broom")
       
-       pp = predictprice(loc, size, bhk, bathroom).round(3)
+#        pp = predictprice(loc, size, bhk, bathroom).round(3)
   
   
-  return render_template("userInput.html" predictedPrice =pp)
+  return render_template("userInput.html")
 
 
 # return " Welcome AIML Jan24 f1"
