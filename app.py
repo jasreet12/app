@@ -12,39 +12,48 @@ Y = df.price
 
 lrmodel = LinearRegression()
 lrmodel.fit(X,Y)
+######### get all locations in the list
+# collist = df.columns
+# loclist = []
+# for item in collist[5:] : 
+# # print (" <option> " + item + "</option>")
+# loclist.append( " <option> " + item + "</option>" )
+##################
+
+
 def predictprice(location,sqft,bath,bhk):
-    '''
-    Function which helps to actually predict the prices.
-    '''
-    loc_index = np.where(X.columns==location)[0][0]     # np.where() function returns the indices of elements in an input array where the given condition is satisfied.
+  '''
+  Function which helps to actually predict the prices.
+  '''
+  loc_index = np.where(X.columns==location)[0][0] # np.where() function returns the indices of elements in an input array where the given condition is satisfied.
 
-    x = np.zeros(len(X.columns))    # np.zeros() function returns a new array of given shape and type, with zeros.
-    x[0] = sqft
-    x[1] = bath
-    x[2] = bhk
-    if loc_index >= 0:
-        x[loc_index] = 1
+  x = np.zeros(len(X.columns)) # np.zeros() function returns a new array of given shape and type, with zeros.
+  x[0] = sqft
+  x[1] = bath
+  x[2] = bhk
+  if loc_index >= 0:
+    x[loc_index] = 1
 
-    return lrmodel.predict([x])[0]
+  return lrmodel.predict([x])[0]
 ############
 
 @app.route('/')
 def method1():
-  
+
   return render_template("index.html" )
 
-@app.route('/userInput')
-def methoduserInput():
-  return render_template("userInput.html")
+@app.route('/project')
+def methodproject():
+  return render_template("project.html" , locations = df.columns[5:])
 
-@app.route('/userInput' ,methods =["POST"] )
-def methoduserInput():
-  loc   = request.form.get("loc")  #'Kothanur'
-  sqft  = request.form.get("size")
-  bhk   = request.form.get("bhk")
-  bath  = request.form.get("bath")
+@app.route('/predict' ,methods =["POST"] )
+def methodpredict():
+  loc = request.form.get("loc") #'Kothanur'
+  sqft = request.form.get("size")
+  bhk = request.form.get("bhk")
+  bath = request.form.get("bath")
   pp = predictprice(loc, sqft, bhk, bath).round(3)
-  return render_template("userInput.html", pprice=pp)
+  return render_template("project.html", pprice=pp)
 
 @app.route('/contact')
 def methodcontact():
@@ -54,5 +63,3 @@ def methodcontact():
 
 if __name__ == '__main__':
   app.run()
-  
-  

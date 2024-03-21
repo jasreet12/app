@@ -1,0 +1,61 @@
+{% extends 'base.html' %} 
+{% block title %} House Price Prediction {% endblock
+%} {% block mainarea %}
+<h1>House Price Prediction</h1>
+:
+<hr />
+<form action="/predict" method="post">
+  <table>
+    <tr>
+      <td>Location :</td>
+      <td> <!--<input type="text" name="loc" />-->
+        <select name="loc">
+          {% for loc in locations %}
+        
+          <option> {{loc}} </option> 
+        
+          {% endfor%}
+        
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td>Size(sqft) :</td>
+      <td><input type="text" name="size" /></td>
+    </tr>
+    <tr>
+      <td>BHK(2/3/4/5..) :</td>
+      <td>  <!--<input type="text" name="bhk" />-->
+        <select name="bhk">
+        
+          {% for i in range(1,9) %}
+        
+          <option> {{i}} </option>
+        
+          {% endfor%}
+        </select>
+        
+      </td>
+    </tr>
+    <tr>
+      <td>Bathroom(2/3/4/5..) :</td>
+      <td> 
+        <!--<input type="text" name="bath" />-->
+          <select name="bath">
+             <option>1</option>
+             <option>2</option>
+             <option>3</option>
+             <option>4</option>
+             <option>5</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2"><input type="submit" value="predict" /></td>
+    </tr>
+  </table>
+</form>
+  <pre>
+  House Price is estimated to be  {{pprice  }} Lakhs
+  </pre>
+{% endblock %}
