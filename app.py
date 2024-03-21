@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np 
 from sklearn.linear_model import LinearRegression
 
-app = Flask(_name_)
+app = Flask(__name__)
 ##############
 file ="https://raw.githubusercontent.com/sarwansingh/Python/master/ClassExamples/data/Bengaluru_House_Data_clean.csv"
 df = pd.read_csv(file)
@@ -33,18 +33,18 @@ def method1():
   
   return render_template("index.html" )
 
-@app.route('/project')
-def methodproject():
-  return render_template("project.html")
+@app.route('/userInput')
+def methoduserInput():
+  return render_template("userInput.html")
 
-@app.route('/predict' ,methods =["POST"] )
-def methodpredict():
+@app.route('/userInput' ,methods =["POST"] )
+def methoduserInput():
   loc   = request.form.get("loc")  #'Kothanur'
   sqft  = request.form.get("size")
   bhk   = request.form.get("bhk")
   bath  = request.form.get("bath")
   pp = predictprice(loc, sqft, bhk, bath).round(3)
-  return render_template("project.html", pprice=pp)
+  return render_template("userInput.html", pprice=pp)
 
 @app.route('/contact')
 def methodcontact():
@@ -52,5 +52,7 @@ def methodcontact():
 
 # return " Welcome AIML Jan24 f1"
 
-if _name_ == '_main_':
+if __name__ == '__main__':
   app.run()
+  
+  
