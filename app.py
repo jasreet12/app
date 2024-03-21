@@ -56,6 +56,7 @@ def methodpredict():
   return render_template("project.html", pprice=pp)
 
 @app.route('/contact')
+
 def methodcontact():
   return render_template("contact.html")
 
