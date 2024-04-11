@@ -15,7 +15,6 @@ def create_database():
 
     # Define SQL commands to create tables
   cur.execute("SELECT name FROM sqlite_master WHERE type='table';")
-
   # Fetch all table names
   tables = cur.fetchall()
 
@@ -142,7 +141,6 @@ def logout():
 def adduserdata1():
   
   name=(request.form.get("name"))
-  
 
   con  = sqlite3.connect("myDB.db")  # connect sms database 
   con.row_factory = sqlite3.Row  # create object of Row 
@@ -152,8 +150,8 @@ def adduserdata1():
   cur.execute(insql) 
   con.commit() 
   con.close()
-  msg="Welcome To Predictor"
-  return render_template('index.html',pprice=msg)
+  
+  return render_template('index.html')
 
 
 
@@ -194,7 +192,6 @@ def methodpredict():
   return render_template("project.html", pprice=pp)
 
 @app.route('/contact')
-
 def methodcontact():
   return render_template("contact.html")
 
