@@ -2,6 +2,7 @@ from flask import *
 import pandas as pd 
 import numpy as np 
 from sklearn.linear_model import LinearRegression
+import sqlite
 
 app = Flask(__name__)
 ##############
