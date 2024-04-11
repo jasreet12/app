@@ -28,7 +28,7 @@ def adduserdata1():
   
   ##database vala kaam 
 
-  con  = sqlite3.connect("db1")  # connect sms database 
+  con  = sqlite3.connect("myDB")  # connect sms database 
   con.row_factory = sqlite3.Row  # create object of Row 
   cur = con.cursor()             # create cursor object, which will hold records 
   
