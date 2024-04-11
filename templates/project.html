@@ -1,61 +1,62 @@
 {% extends 'base.html' %} 
-{% block title %} House Price Prediction {% endblock
-%} {% block mainarea %}
-<h1>House Price Prediction</h1>
-:
-<hr />
-<form action="/predict" method="post">
-  <table>
-    <tr>
-      <td>Location :</td>
-      <td> <!--<input type="text" name="loc" />-->
-        <select name="loc">
+{% block title %} House Price Prediction {% endblock %}
+{% block mainarea %}
+<div class="container">
+  <h1>House Price Prediction</h1>
+  <hr />
+
+  <form action="/predict" method="post">
+    <div class="form-group row">
+      <label for="location" class="col-sm-2 col-form-label">Location:</label>
+      <div class="col-sm-10">
+        <select name="loc" class="form-control">
           {% for loc in locations %}
-        
-          <option> {{loc}} </option> 
-        
-          {% endfor%}
-        
+          <option>{{ loc }}</option>
+          {% endfor %}
         </select>
-      </td>
-    </tr>
-    <tr>
-      <td>Size(sqft) :</td>
-      <td><input type="text" name="size" /></td>
-    </tr>
-    <tr>
-      <td>BHK(2/3/4/5..) :</td>
-      <td>  <!--<input type="text" name="bhk" />-->
-        <select name="bhk">
-        
-          {% for i in range(1,9) %}
-        
-          <option> {{i}} </option>
-        
-          {% endfor%}
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="size" class="col-sm-2 col-form-label">Size (sqft):</label>
+      <div class="col-sm-10">
+        <input type="text" name="size" class="form-control" />
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="bhk" class="col-sm-2 col-form-label">BHK (2/3/4/5...):</label>
+      <div class="col-sm-10">
+        <select name="bhk" class="form-control">
+          {% for i in range(1, 9) %}
+          <option>{{ i }}</option>
+          {% endfor %}
         </select>
-        
-      </td>
-    </tr>
-    <tr>
-      <td>Bathroom(2/3/4/5..) :</td>
-      <td> 
-        <!--<input type="text" name="bath" />-->
-          <select name="bath">
-             <option>1</option>
-             <option>2</option>
-             <option>3</option>
-             <option>4</option>
-             <option>5</option>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="bath" class="col-sm-2 col-form-label">Bathroom (2/3/4/5...):</label>
+      <div class="col-sm-10">
+        <select name="bath" class="form-control">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
         </select>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="2"><input type="submit" value="predict" /></td>
-    </tr>
-  </table>
-</form>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-sm-10 offset-sm-2">
+        <input type="submit" value="Predict" class="btn btn-primary" />
+      </div>
+    </div>
+  </form>
+
   <pre>
-  House Price is estimated to be  {{pprice  }} Lakhs
+    House Price is estimated to be {{ pprice }} Lakhs
   </pre>
+</div>
 {% endblock %}

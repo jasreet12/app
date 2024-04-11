@@ -115,6 +115,7 @@ def loginuser():
     uname  = r["username"]
     
   if uname is ""  :
+    
     msg="Invalid user"
     return   render_template('login.html',a=msg) #str(" Invalid user ")
   else :
@@ -177,7 +178,6 @@ def method1():
 
   return render_template("index.html" )
 
-
 @app.route('/project')
 def methodproject():
   return render_template("project.html" , locations = df.columns[5:])
@@ -190,6 +190,7 @@ def methodpredict():
   bath = request.form.get("bath")
   pp = predictprice(loc, sqft, bhk, bath).round(3)
   return render_template("project.html", pprice=pp)
+
 
 @app.route('/contact')
 def methodcontact():
