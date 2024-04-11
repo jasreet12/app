@@ -19,6 +19,24 @@ lrmodel.fit(X,Y)
 # # print (" <option> " + item + "</option>")
 # loclist.append( " <option> " + item + "</option>" )
 ##################
+@app.route('/adduserdata1',methods=['POST'])
+def adduserdata1():
+  
+  name=(request.form.get("name"))
+  
+  
+  ##database vala kaam 
+
+  con  = sqlite3.connect("db1")  # connect sms database 
+  con.row_factory = sqlite3.Row  # create object of Row 
+  cur = con.cursor()             # create cursor object, which will hold records 
+  
+  insql="insert into attendance(name,date_time) values ('"+name+"',datetime('now', '+5 hours', '+30 minutes'))"
+  cur.execute(insql) 
+  con.commit() 
+  con.close()
+  msg="Welcome To Predictor"
+  return render_template('index.html',a=msg)
 
 
 def predictprice(location,sqft,bath,bhk):
