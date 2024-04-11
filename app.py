@@ -20,6 +20,95 @@ lrmodel.fit(X,Y)
 # # print (" <option> " + item + "</option>")
 # loclist.append( " <option> " + item + "</option>" )
 ##################
+
+
+
+@app.route('/showdata')
+def showdata():
+  con  = sqlite3.connect("myDB")  # connect sms database
+  con.row_factory = sqlite3.Row  # create object of Row
+  cur = con.cursor()             # create cursor object, which will hold records 
+                      # being fetched from database. 
+ 
+  cur.execute( "select * from attendance") 
+  rows = cur.fetchall()          # all the data pulled from database is stored in rows object 
+  con.close ()
+  return render_template("showdata.html", data=rows) 
+
+###
+@app.route('/signup')
+def signup():
+  return render_template("signup.html")
+
+####
+
+ 
+
+@app.route('/adduserdata',methods=['POST'])
+def adduserdata():
+  username=(request.form.get("username"))
+  name=(request.form.get("name"))
+  email=(request.form.get("email"))
+  password=(request.form.get("upassword"))
+  
+  ##database vala kaam 
+
+  con  = sqlite3.connect("myDB")  # connect sms database 
+  con.row_factory = sqlite3.Row  # create object of Row 
+  cur = con.cursor()             # create cursor object, which will hold records  
+  insql="insert into student(name,username,email,passowrd) values ('"+name+"' , '"+username+"' , '"+email+"' , '"+password+"')"
+  cur.execute(insql) 
+  con.commit() 
+  con.close()
+  date = datetime.now()
+  msg="Welcome To Predictor"
+  return render_template('index.html',a=date)
+
+####
+@app.route('/login')
+def login():
+  return render_template("login.html")
+
+
+@app.route("/loginuser",methods=['POST'])
+def loginuser():
+  usern=(request.form.get("username"))
+  pw=(request.form.get("pwd"))
+  # connect with database and check whether record 
+  # exist with username having email as uemail and password as upwd.
+  con  = sqlite3.connect("myDB") 
+  con.row_factory = sqlite3.Row
+  cur = con.cursor() 
+  cur.execute( "select * from student where username=='%s' and passowrd=='%s'" %(usern, pw ))
+  rows = cur.fetchall()
+  con.close ()
+  uname =""
+  for r in rows :
+    uname  = r["username"]
+    
+  if uname is ""  :
+    msg="Invalid user"
+    return   render_template('login.html',a=msg) #str(" Invalid user ")
+  else :
+    session ["username"] = uname
+    msg="Welcome back "+r["name"]
+  return render_template('index.html',a=msg)
+
+
+  
+@app.route('/logout')
+def logout():
+  #remove session varible and redirect to index page
+  session.clear()  # will clear the entire session 
+  #session.pop("username")  # will remove only one variable named username 
+  return redirect( url_for('method1'))
+
+
+
+
+
+
+
 @app.route('/adduserdata1',methods=['POST'])
 def adduserdata1():
   
