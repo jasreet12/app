@@ -5,6 +5,28 @@ from sklearn.linear_model import LinearRegression
 import sqlite3
 
 app = Flask(__name__)
+
+def create_database():
+  # Connect to the SQLite database (or create it if it doesn't exist)
+  conn = sqlite3.connect('myDB.db')
+
+    # Create a cursor object to execute SQL commands
+  cur = conn.cursor()
+
+    # Define SQL commands to create tables
+  cur.execute("SELECT name FROM sqlite_master WHERE type='table';")
+
+  # Fetch all table names
+  tables = cur.fetchall()
+
+  # Print table names
+  print("Tables in the database:")
+  for table in tables:
+      print(table[0])
+
+  # Close the connection
+  conn.close()
+create_database()
 ##############
 file ="https://raw.githubusercontent.com/sarwansingh/Python/master/ClassExamples/data/Bengaluru_House_Data_clean.csv"
 df = pd.read_csv(file)
@@ -25,7 +47,7 @@ lrmodel.fit(X,Y)
 
 @app.route('/showdata')
 def showdata():
-  con  = sqlite3.connect("myDB")  # connect sms database
+  con  = sqlite3.connect("myDB.db")  # connect sms database
   con.row_factory = sqlite3.Row  # create object of Row
   cur = con.cursor()             # create cursor object, which will hold records 
                       # being fetched from database. 
@@ -44,23 +66,11 @@ def signup():
 
 ####
 
- 
-  
-  
-  SQLite format 3@  -�
-PV�P^!!�tableattendanceattendanceCREATE TABLE attendance (name varchar(50),date_time DATETIME)Rytablestudent1student1CREATE TABLE student1( name varchar,datetime DATETIME)P++Ytablesqlite_sequencesqlite_sequenceCREATE TABLE sqlite_sequence(name,seq)�'�%tablestudentstudentCREATE TABLE student(
-id INTEGER PRIMARY KEY AUTOINCREMENT,
-name varchar(50),
-username varchar(50),
-email varchar(50),
-passowrd varchar(50))
-	&��{<���X&0	-#RAGHAVRAGHAV222RAGHAV@gmail.comhuggingface6#1#AMANDEEPAMANDEEP222AMANDEEP@gmail.comhuggingface0-#RAGHAVRAGHAV222RAGHAV@gmail.comhuggingface;)7!Prateek MittalPrateekCPrateekm201@gmail.comprateek201;)7!Prateek MittalPrateekCPrateekm201@gmail.comprateek201=-?AmandeepcooldudeAmandeepdubeyamandeep72@gmail.combhagya#-Rakeshrakrakesh@gmail.comrara,--Ridham Khazanchiridzridham@gmail.comrk0%7Raghav Batraraghavbraghavb4563@gmail.comrr
-��student	
-
 
-z����jK-����z
-3PRANJAL2024-04-10 15:40:573RAGHAV2024-04-10 15:31:193RAGHAV2024-04-10 15:30:39
-3RAGHAV2024-04-10 15:18:23	3MANYA2024-04-10 15:14:063MANYA2024-04-10 15:09:593RAGHAV2024-04-10 14:55:213ANUBHAV2024-04-10 14:48:323Unknown2024-04-10 14:46:173RAGHAV2024-04-10 14:42:003AMANDEEP2024-04-10 14:44:543RAGHAV2024-04-10 09:00:453abc2024-04-10 08:57:25
+
+  
+  
+  
   
 
 @app.route('/adduserdata',methods=['POST'])
@@ -72,7 +82,7 @@ def adduserdata():
   
   ##database vala kaam 
 
-  con  = sqlite3.connect("myDB")  # connect sms database 
+  con  = sqlite3.connect("myDB.db")  # connect sms database 
   con.row_factory = sqlite3.Row  # create object of Row 
   cur = con.cursor()             # create cursor object, which will hold records  
   insql="insert into student(name,username,email,passowrd) values ('"+name+"' , '"+username+"' , '"+email+"' , '"+password+"')"
@@ -95,7 +105,7 @@ def loginuser():
   pw=(request.form.get("pwd"))
   # connect with database and check whether record 
   # exist with username having email as uemail and password as upwd.
-  con  = sqlite3.connect("myDB") 
+  con  = sqlite3.connect("myDB.db") 
   con.row_factory = sqlite3.Row
   cur = con.cursor() 
   cur.execute( "select * from student where username=='%s' and passowrd=='%s'" %(usern, pw ))
@@ -134,7 +144,7 @@ def adduserdata1():
   name=(request.form.get("name"))
   
 
-  con  = sqlite3.connect("myDB")  # connect sms database 
+  con  = sqlite3.connect("myDB.db")  # connect sms database 
   con.row_factory = sqlite3.Row  # create object of Row 
   cur = con.cursor()             # create cursor object, which will hold records 
   
