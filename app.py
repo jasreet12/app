@@ -55,7 +55,7 @@ def showdata():
   cur.execute( "select * from users") 
   rows = cur.fetchall()          # all the data pulled from database is stored in rows object 
   con.close ()
-  return render_template("showdata.html", data=rows) 
+  return render_template("showData.html", data=rows) 
 
 ###
 @app.route('/signup')
