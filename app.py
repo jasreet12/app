@@ -2,7 +2,7 @@ from flask import *
 import pandas as pd 
 import numpy as np 
 from sklearn.linear_model import LinearRegression
-import sqlite
+import sqlite3
 
 app = Flask(__name__)
 ##############
@@ -37,7 +37,7 @@ def adduserdata1():
   con.commit() 
   con.close()
   msg="Welcome To Predictor"
-  return render_template('index.html',a=msg)
+  return render_template('index.html',pprice=pp)
 
 
 def predictprice(location,sqft,bath,bhk):
