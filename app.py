@@ -25,8 +25,6 @@ def adduserdata1():
   
   name=(request.form.get("name"))
   
-  
-  ##database vala kaam 
 
   con  = sqlite3.connect("myDB")  # connect sms database 
   con.row_factory = sqlite3.Row  # create object of Row 
@@ -37,7 +35,9 @@ def adduserdata1():
   con.commit() 
   con.close()
   msg="Welcome To Predictor"
-  return render_template('index.html',pprice=pp)
+  return render_template('index.html',pprice=msg)
+
+
 
 
 def predictprice(location,sqft,bath,bhk):
