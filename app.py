@@ -60,7 +60,6 @@ def showdata():
 @app.route('/signup')
 def signup():
   
-  
   return render_template("signup.html")
 
 ####
@@ -90,7 +89,7 @@ def adduserdata():
   con.close()
   date = datetime.now()
   msg="Welcome To Predictor"
-  return render_template('addData.html',a=date)
+  return render_template('index.html',a=date)
 
 
 ####
