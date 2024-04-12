@@ -79,13 +79,13 @@ def adduserdata():
   password=(request.form.get("upassword"))
   
   ##database vala kaam 
-
   con  = sqlite3.connect("myDB")  # connect sms database 
   con.row_factory = sqlite3.Row  # create object of Row 
   cur = con.cursor()             # create cursor object, which will hold records  
   insql="insert into student(name,username,email,passowrd) values ('"+name+"' , '"+username+"' , '"+email+"' , '"+password+"')"
   cur.execute(insql) 
   con.commit() 
+  
   con.close()
   date = datetime.now()
   msg="Welcome To Predictor"
