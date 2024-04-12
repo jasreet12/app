@@ -1,0 +1,7 @@
+SQLite format 3@  -�
+PV�P^!!�tableattendanceattendanceCREATE TABLE attendance (name varchar(50),date_time DATETIME)Rytablestudent1student1CREATE TABLE student1( name varchar,datetime DATETIME)P++Ytablesqlite_sequencesqlite_sequenceCREATE TABLE sqlite_sequence(name,seq)�'�%tablestudentstudentCREATE TABLE student(
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+name varchar(50),
+username varchar(50),
+email varchar(50),
+passowrd varchar(50))
