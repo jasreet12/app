@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np 
 from sklearn.linear_model import LinearRegression
 import sqlite3
+import request, render_template
 
 app = Flask(__name__)
 
@@ -142,6 +143,7 @@ def logout():
 def adduserdata1():
   
   name=(request.form.get("name"))
+  # name = "nikshep"
 
   con  = sqlite3.connect("myDB")  # connect sms database 
   con.row_factory = sqlite3.Row  # create object of Row 
