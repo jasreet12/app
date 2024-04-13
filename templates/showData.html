@@ -5,34 +5,27 @@ AIML Deployment
 {% endblock %}
 
 {% block mainarea %}
-<h1>Attendance Report</h1>
-
-<form action="/showdata" method="GET">
-  <label for="date">Select Date:</label>
-  <input type="date" id="date" name="date">
-  <button type="submit">Search</button>
-</form>
-
-{% if data %}
-<table class="table table-bordered table-dark">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Date - Time</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for r in data %}
-    <tr>
-      <td>{{ r[0] }}</td>
-      <td>{{ r[1] }}</td>
-      <td>{{r[2]}}</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
-{% else %}
-<p>No attendance data available for the selected date.</p>
-{% endif %}
-
+<div class="container">
+    <h1 class="mt-5">Attendance Report</h1>
+    <div class="table-responsive mt-4">
+        <table class="table table-bordered table-dark text-center">
+            <thead>
+                <tr>
+                    <th scope="col">Sr No.</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Date & Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for r in data %}
+                <tr>
+                    <td>{{ r[0] }}</td>
+                    <td>{{ r[1] }}</td>
+                    <td>{{ r[2] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 {% endblock %}
