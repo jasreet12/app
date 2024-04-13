@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 def create_database():
   # Connect to the SQLite database (or create it if it doesn't exist)
-  conn = sqlite3.connect('myDB.db')
+  conn = sqlite3.connect('myDB')
 
     # Create a cursor object to execute SQL commands
   cur = conn.cursor()
@@ -25,7 +25,7 @@ def create_database():
 
   # Close the connection
   conn.close()
-# create_database()
+create_database()
 ##############
 file ="https://raw.githubusercontent.com/sarwansingh/Python/master/ClassExamples/data/Bengaluru_House_Data_clean.csv"
 df = pd.read_csv(file)
@@ -143,7 +143,7 @@ def adduserdata1():
   
   name=(request.form.get("name"))
 
-  con  = sqlite3.connect("myDB.db")  # connect sms database 
+  con  = sqlite3.connect("myDB")  # connect sms database 
   con.row_factory = sqlite3.Row  # create object of Row 
   cur = con.cursor()             # create cursor object, which will hold records 
   
