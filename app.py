@@ -62,12 +62,12 @@ def showdata():
     con = sqlite3.connect("myDB")
     con.row_factory = sqlite3.Row
     cur = con.cursor()
-
-    cur.execute("SELECT name, strftime('%Y-%m-%d %H:%M:%S', date_time) AS formatted_date_time FROM attendance")
+    cur.execute("SELECT id,name, strftime('%Y-%m-%d %H:%M:%S', date_time) AS formatted_date_time FROM attendance")
     rows = cur.fetchall()
-
+    rows_with_serial = [(idx + 1, row['name'], row['formatted_date_time']) for idx, row in enumerate(rows)]
     con.close()
     return render_template("showData.html", data=rows)
+  
 
 ###
 @app.route('/signup')
