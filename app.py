@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 def create_database():
   # Connect to the SQLite database (or create it if it doesn't exist)
-  conn = sqlite3.connect('myDB')
+  conn = sqlite3.connect('myDB.db')
 
     # Create a cursor object to execute SQL commands
   cur = conn.cursor()
@@ -25,7 +25,7 @@ def create_database():
 
   # Close the connection
   conn.close()
-create_database()
+# create_database()
 ##############
 file ="https://raw.githubusercontent.com/sarwansingh/Python/master/ClassExamples/data/Bengaluru_House_Data_clean.csv"
 df = pd.read_csv(file)
@@ -46,7 +46,7 @@ lrmodel.fit(X,Y)
 
 @app.route('/showdata')
 def showdata():
-  con  = sqlite3.connect("myDB")  # connect sms database
+  con  = sqlite3.connect("myDB.db")  # connect sms database
   con.row_factory = sqlite3.Row  # create object of Row
   cur = con.cursor()             # create cursor object, which will hold records 
                       # being fetched from database. 
@@ -79,7 +79,7 @@ def adduserdata():
   password=(request.form.get("upassword"))
   
   ##database vala kaam 
-  con  = sqlite3.connect("myDB")  # connect sms database 
+  con  = sqlite3.connect("myDB.db")  # connect sms database 
   con.row_factory = sqlite3.Row  # create object of Row 
   cur = con.cursor()             # create cursor object, which will hold records  
   insql="insert into student(name,username,email,passowrd) values ('"+name+"' , '"+username+"' , '"+email+"' , '"+password+"')"
@@ -104,7 +104,7 @@ def loginuser():
   pw=(request.form.get("pwd"))
   # connect with database and check whether record 
   # exist with username having email as uemail and password as upwd.
-  con  = sqlite3.connect("myDB") 
+  con  = sqlite3.connect("myDB.db") 
   con.row_factory = sqlite3.Row
   cur = con.cursor() 
   cur.execute( "select * from student where username=='%s' and passowrd=='%s'" %(usern, pw ))
@@ -143,7 +143,7 @@ def adduserdata1():
   
   name=(request.form.get("name"))
 
-  con  = sqlite3.connect("myDB")  # connect sms database 
+  con  = sqlite3.connect("myDB.db")  # connect sms database 
   con.row_factory = sqlite3.Row  # create object of Row 
   cur = con.cursor()             # create cursor object, which will hold records 
   
