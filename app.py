@@ -139,7 +139,7 @@ def logout():
 
 
 
-@app.route('/adduserdata1', methods=['GET'])  # Specify that this route handles POST requests
+@app.route('/adduserdata1', methods=['POST'])  # Specify that this route handles POST requests
 def adduserdata1():
     name = request.form.get("name")
     # name = "nikshep"
