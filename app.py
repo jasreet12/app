@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np 
 from sklearn.linear_model import LinearRegression
 import sqlite3
-import request, render_template
+from flask import request
 
 app = Flask(__name__)
 
@@ -139,22 +139,20 @@ def logout():
 
 
 
-@app.route('/adduserdata1',methods=['POST'])
+@app.route('/adduserdata1', methods=['GET'])  # Specify that this route handles POST requests
 def adduserdata1():
-  
-  name=(request.form.get("name"))
-  # name = "nikshep"
+    name = request.form.get("name")
 
-  con  = sqlite3.connect("myDB")  # connect sms database 
-  con.row_factory = sqlite3.Row  # create object of Row 
-  cur = con.cursor()             # create cursor object, which will hold records 
+    con = sqlite3.connect("myDB")  
+    con.row_factory = sqlite3.Row  
+    cur = con.cursor()             
   
-  insql="insert into attendance(name,date_time) values ('"+name+"',datetime('now', '+5 hours', '+30 minutes'))"
-  cur.execute(insql) 
-  con.commit() 
-  con.close()
+    insql = "INSERT INTO attendance(name, date_time) VALUES (?, datetime('now', '+5 hours', '+30 minutes'))"
+    cur.execute(insql, (name,))
+    con.commit() 
+    con.close()
   
-  return render_template('index.html')
+    return render_template('index.html')
 
 
 

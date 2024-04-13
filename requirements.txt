@@ -4,3 +4,4 @@ numpy
 scikit-learn
 sqlite3
 datetime
+requests
