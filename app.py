@@ -142,7 +142,7 @@ def logout():
 @app.route('/adduserdata1', methods=['GET'])  # Specify that this route handles POST requests
 def adduserdata1():
     name = request.form.get("name")
-
+    # name = "nikshep"
     con = sqlite3.connect("myDB")  
     con.row_factory = sqlite3.Row  
     cur = con.cursor()             
