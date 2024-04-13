@@ -45,17 +45,29 @@ lrmodel.fit(X,Y)
 
 
 
+# @app.route('/showdata')
+# def showdata():
+#   con  = sqlite3.connect("myDB")  # connect sms database
+#   con.row_factory = sqlite3.Row  # create object of Row
+#   cur = con.cursor()             # create cursor object, which will hold records 
+#                       # being fetched from database. 
+ 
+#   cur.execute( "select * from attendance") 
+#   rows = cur.fetchall()          # all the data pulled from database is stored in rows object 
+#   con.close ()
+#   return render_template("showData.html", data=rows) 
+
 @app.route('/showdata')
 def showdata():
-  con  = sqlite3.connect("myDB.db")  # connect sms database
-  con.row_factory = sqlite3.Row  # create object of Row
-  cur = con.cursor()             # create cursor object, which will hold records 
-                      # being fetched from database. 
- 
-  cur.execute( "select * from users") 
-  rows = cur.fetchall()          # all the data pulled from database is stored in rows object 
-  con.close ()
-  return render_template("showData.html", data=rows) 
+    con = sqlite3.connect("myDB")
+    con.row_factory = sqlite3.Row
+    cur = con.cursor()
+
+    cur.execute("SELECT name, strftime('%Y-%m-%d %H:%M:%S', date_time) AS formatted_date_time FROM attendance")
+    rows = cur.fetchall()
+
+    con.close()
+    return render_template("showData.html", data=rows)
 
 ###
 @app.route('/signup')
