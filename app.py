@@ -23,6 +23,7 @@ def create_database():
   print("Tables in the database:")
   for table in tables:
       print(table[0])
+    
 
   # Close the connection
   conn.close()
@@ -57,17 +58,41 @@ lrmodel.fit(X,Y)
 #   con.close ()
 #   return render_template("showData.html", data=rows) 
 
-@app.route('/showdata')
+# @app.route('/showdata')
+# def showdata():
+#     con = sqlite3.connect("myDB")
+#     con.row_factory = sqlite3.Row
+#     cur = con.cursor()
+#     cur.execute("SELECT id,name, strftime('%Y-%m-%d %H:%M:%S', date_time) AS formatted_date_time FROM attendance")
+#     rows = cur.fetchall()
+#     rows_with_serial = [(idx + 1, row['name'], row['formatted_date_time']) for idx, row in enumerate(rows)]
+#     con.close()
+#     return render_template("showData.html", data=rows_with_serial)
+ 
+@app.route('/showdata', methods=['GET'])
 def showdata():
-    con = sqlite3.connect("myDB")
-    con.row_factory = sqlite3.Row
-    cur = con.cursor()
-    cur.execute("SELECT id,name, strftime('%Y-%m-%d %H:%M:%S', date_time) AS formatted_date_time FROM attendance")
-    rows = cur.fetchall()
-    rows_with_serial = [(idx + 1, row['name'], row['formatted_date_time']) for idx, row in enumerate(rows)]
-    con.close()
-    return render_template("showData.html", data=rows)
-  
+    try:
+        selected_date = request.args.get('date')
+        if selected_date:
+            # Parse the selected date string to a datetime object
+            parsed_date = datetime.strptime(selected_date, '%Y-%m-%d')
+            # Convert the datetime object back to a string in the required format for comparison
+            formatted_date = parsed_date.strftime('%Y-%m-%d')
+
+            con = sqlite3.connect("myDB")
+            con.row_factory = sqlite3.Row
+            cur = con.cursor()
+
+            # Modify the SQL query to filter results based on the selected date
+            cur.execute("SELECT name, strftime('%Y-%m-%d %H:%M:%S', date_time) AS formatted_date_time FROM attendance WHERE date(date_time) = ?", (formatted_date,))
+            rows = cur.fetchall()
+
+            con.close()
+            return render_template("showData.html", data=rows)
+        else:
+            return render_template("showData.html", data=None)  # No date selected, render template with no data
+    except Exception as e:
+        return str(e)
 
 ###
 @app.route('/signup')

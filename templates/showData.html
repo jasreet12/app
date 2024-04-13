@@ -1,14 +1,38 @@
 {% extends 'base.html' %}
 
 {% block title%}
-AIML Deployement
+AIML Deployment
 {% endblock %}
 
 {% block mainarea %}
-<h1> Attendance Report</h1>
+<h1>Attendance Report</h1>
+
+<form action="/showdata" method="GET">
+  <label for="date">Select Date:</label>
+  <input type="date" id="date" name="date">
+  <button type="submit">Search</button>
+</form>
+
+{% if data %}
 <table class="table table-bordered table-dark">
-{% for r in data %}
-  <tr><td>{{idx[r+1]}}</td><td>{{r[1]}}</td><td>{{r[2]}}</td></tr>
-{% endfor %}
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Date - Time</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for r in data %}
+    <tr>
+      <td>{{ r[0] }}</td>
+      <td>{{ r[1] }}</td>
+      <td>{{r[2]}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
 </table>
+{% else %}
+<p>No attendance data available for the selected date.</p>
+{% endif %}
+
 {% endblock %}
