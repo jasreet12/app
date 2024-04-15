@@ -134,6 +134,10 @@ def methodpredict():
 def methodcontact():
   return render_template("contact.html")
 
+@app.route('/getLocation')
+def methodcontact():
+  return render_template("contact.html")
+
 # return " Welcome AIML Jan24 f1"
 
 if __name__ == '__main__':
