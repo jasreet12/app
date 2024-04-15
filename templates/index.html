@@ -9,9 +9,13 @@
     Welcome to AIML
   </h1>
 <a href="https://huggingface.co/spaces/nikshep01/multipleFaceDetection">Mark your attendance</a>
-getLocation()
+
 
  <script>
+         
+        window.onload = function() {
+          getLocation();
+        };
         function getLocation() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(sendLocation, handleLocationError);
@@ -24,7 +28,7 @@ getLocation()
             var latitude = position.coords.latitude;
             var longitude = position.coords.longitude;
 
-            fetch('/get-location', {
+            fetch('/adduserdata1', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

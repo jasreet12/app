@@ -75,19 +75,7 @@ def showdata():
 
 
 
-@app.route('/get-location', methods=['POST'])
-def get_location():
-    location =[]
 
-    data = request.get_json()
-    latitude = data.get('latitude')
-    longitude = data.get('longitude')
-    location.append(latitude)
-    location.append(longitude)
-    print(location)
-    # Process latitude and longitude here
-  
-    return "location"
 
 
 @app.route('/adduserdata1', methods=['get'])  # Specify that this route handles POST requests
@@ -97,6 +85,7 @@ def adduserdata1():
     data = response.json()
     latitude = data['latitude']
     longitude = data['longitude']
+    print(latitude, longitude)
     con = sqlite3.connect("myDB")  
     con.row_factory = sqlite3.Row  
     cur = con.cursor()             
