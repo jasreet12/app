@@ -80,6 +80,7 @@ def get_location():
     latitude = data.get('latitude')
     longitude = data.get('longitude')
     
+    print(latitude , longitude)
     # Process latitude and longitude here
     
     return 'Location received successfully'
@@ -142,8 +143,8 @@ def methodpredict():
 def methodcontact():
   return render_template("contact.html")
 
-@app.route('/getLocation')
-def methodcontact():
+@app.route('/getlocation')
+def methodLocation():
   return render_template("getLocation.html")
 
 # return " Welcome AIML Jan24 f1"
