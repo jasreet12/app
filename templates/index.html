@@ -10,39 +10,41 @@
   </h1>
 <a href="https://huggingface.co/spaces/nikshep01/multipleFaceDetection">Mark your attendance</a>
 
+<script>
+    window.onload = function() {
+        getLocation();
+    };
 
- <script>
-         
-        window.onload = function() {
-          getLocation();
-        };
-        function getLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(sendLocation, handleLocationError);
-            } else {
-                alert("Geolocation is not supported by this browser.");
-            }
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(sendLocation, handleLocationError);
+        } else {
+            alert("Geolocation is not supported by this browser.");
         }
+    }
 
-        function sendLocation(position) {
-            var latitude = position.coords.latitude;
-            var longitude = position.coords.longitude;
+    function sendLocation(position) {
+        var latitude = position.coords.latitude;
+        var longitude = position.coords.longitude;
 
-            fetch('/adduserdata1', {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ latitude: latitude, longitude: longitude })
-            })
-            .then(response => response.text())
-            .then(data => console.log(data))
-            .catch(error => console.error('Error:', error));
-        }
+        // Construct the URL with latitude and longitude as query parameters
+        var url = `/adduserdata1?latitude=${latitude}&longitude=${longitude}`;
 
-        function handleLocationError(error) {
-            console.error("Error getting location:", error.message);
-        }
-    </script>
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+        .then(response => response.text())
+        .then(data => console.log(data))
+        .catch(error => console.error('Error:', error));
+    }
+
+    function handleLocationError(error) {
+        console.error("Error getting location:", error.message);
+    }
+</script>
+
 
 {% endblock %}
