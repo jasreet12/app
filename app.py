@@ -82,7 +82,7 @@ def showdata():
 def adduserdata1():
     name = request.form.get("name")
     # name = "nikshep"
-    data = response.json()
+    data = response.get_json()
     latitude = data['latitude']
     longitude = data['longitude']
     print(latitude, longitude)
