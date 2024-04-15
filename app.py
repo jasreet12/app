@@ -83,7 +83,7 @@ def get_location():
     print(latitude , longitude)
     # Process latitude and longitude here
     
-    return 'Location received successfully'
+    return latitude , longitude,'Location received successfully'
 
 
 @app.route('/adduserdata1', methods=['get'])  # Specify that this route handles POST requests
@@ -121,10 +121,7 @@ def predictprice(location,sqft,bath,bhk):
 
 @app.route('/')
 def method1():
-  data = request.get_json()
-  latitude = data.get('latitude')
-  longitude = data.get('longitude')  
-  print(latitude , longitude)
+  
   return render_template("index.html" )
 
 @app.route('/project')

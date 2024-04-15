@@ -11,35 +11,5 @@
 <a href="https://huggingface.co/spaces/nikshep01/multipleFaceDetection">Mark your attendance</a>
 
 
-<button onclick="getLocation()">Get Location</button>
 
-    <script>
-        function getLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(sendLocation, handleLocationError);
-            } else {
-                alert("Geolocation is not supported by this browser.");
-            }
-        }
-
-        function sendLocation(position) {
-            var latitude = position.coords.latitude;
-            var longitude = position.coords.longitude;
-
-            fetch('/get-location', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ latitude: latitude, longitude: longitude })
-            })
-            .then(response => response.text())
-            .then(data => console.log(data))
-            .catch(error => console.error('Error:', error));
-        }
-
-        function handleLocationError(error) {
-            console.error("Error getting location:", error.message);
-        }
-    </script>
 {% endblock %}
