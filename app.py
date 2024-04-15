@@ -88,8 +88,7 @@ def get_location():
   
     return jsonify({'latitude': latitude, 'longitude': longitude})
 
-data = response.json
-print(data['latitude'])
+
 
 @app.route('/adduserdata1', methods=['get'])  # Specify that this route handles POST requests
 def adduserdata1():
