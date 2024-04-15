@@ -94,11 +94,14 @@ def get_location():
 def adduserdata1():
     name = request.form.get("name")
     # name = "nikshep"
+    data = response.json()
+    latitude = data['latitude']
+    longitude = data['longitude']
     con = sqlite3.connect("myDB")  
     con.row_factory = sqlite3.Row  
     cur = con.cursor()             
   
-    insql = "INSERT INTO attendance(name, date_time) VALUES (?, datetime('now', '+5 hours', '+30 minutes'))"
+    insql = "INSERT INTO attendance(name, date_time, latitude,longitude) VALUES (?,?,?, datetime('now', '+5 hours', '+30 minutes'))"
     cur.execute(insql, (name,))
     con.commit() 
     con.close()
