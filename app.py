@@ -82,9 +82,12 @@ def showdata():
 def adduserdata1():
     name = request.form.get("name")
     # name = "nikshep"
-    data = response.json()
-    latitude = data['latitude']
-    longitude = data['longitude']
+    latitude = request.args.get('latitude')
+    longitude = request.args.get('longitude')
+
+    # Process latitude and longitude here
+    print("Latitude:", latitude)
+    print("Longitude:", longitude)
     print(latitude, longitude)
     con = sqlite3.connect("myDB")  
     con.row_factory = sqlite3.Row  
