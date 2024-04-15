@@ -82,12 +82,12 @@ def get_location():
     data = request.get_json()
     latitude = data.get('latitude')
     longitude = data.get('longitude')
-    
-    print(latitude , longitude)
+    location.append(latitude)
+    location.append(longitude)
+    print(location)
     # Process latitude and longitude here
   
-    return jsonify({'latitude': latitude, 'longitude': longitude})
-
+    return "location"
 
 
 @app.route('/adduserdata1', methods=['get'])  # Specify that this route handles POST requests
