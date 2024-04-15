@@ -8,6 +8,7 @@ from datetime import datetime
 
 app = Flask(__name__)
 
+
 def create_database():
   # Connect to the SQLite database (or create it if it doesn't exist)
   conn = sqlite3.connect('myDB')
@@ -76,14 +77,17 @@ def showdata():
 
 @app.route('/get-location', methods=['POST'])
 def get_location():
+    location =[]
+
     data = request.get_json()
     latitude = data.get('latitude')
     longitude = data.get('longitude')
     
     print(latitude , longitude)
     # Process latitude and longitude here
-    
-    return latitude , longitude,'Location received successfully'
+  
+    return jsonify({'latitude': latitude, 'longitude': longitude})
+
 
 
 @app.route('/adduserdata1', methods=['get'])  # Specify that this route handles POST requests
