@@ -103,7 +103,6 @@ def adduserdata1():
 
 
 
-
 def predictprice(location,sqft,bath,bhk):
   '''
   Function which helps to actually predict the prices.
@@ -122,7 +121,10 @@ def predictprice(location,sqft,bath,bhk):
 
 @app.route('/')
 def method1():
-
+  data = request.get_json()
+  latitude = data.get('latitude')
+  longitude = data.get('longitude')  
+  print(latitude , longitude)
   return render_template("index.html" )
 
 @app.route('/project')
