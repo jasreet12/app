@@ -81,19 +81,19 @@ def showdata():
 @app.route('/adduserdata1', methods=['get'])  # Specify that this route handles POST requests
 def adduserdata1():
     name = request.form.get("name")
-    # name = "nikshep"
-    latitude = request.args.get('latitude')
-    longitude = request.args.get('longitude')
+#     # name = "nikshep"
+#     latitude = request.get('latitude')
+#     longitude = request.get('longitude')
 
-    # Process latitude and longitude here
-    print("Latitude:", latitude)
-    print("Longitude:", longitude)
-    print(latitude, longitude)
+#     # Process latitude and longitude here
+#     print("Latitude:", latitude)
+#     print("Longitude:", longitude)
+#     print(latitude, longitude)
     con = sqlite3.connect("myDB")  
     con.row_factory = sqlite3.Row  
     cur = con.cursor()             
   
-    insql = "INSERT INTO attendance(name, date_time, latitude,longitude) VALUES (?,?,?, datetime('now', '+5 hours', '+30 minutes'))"
+    insql = "INSERT INTO attendance(name, date_time) VALUES (?, datetime('now', '+5 hours', '+30 minutes'))"
     cur.execute(insql, (name,))
     con.commit() 
     con.close()
