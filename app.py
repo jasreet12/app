@@ -74,7 +74,15 @@ def showdata():
 
 
 
-
+@app.route('/get-location', methods=['POST'])
+def get_location():
+    data = request.get_json()
+    latitude = data.get('latitude')
+    longitude = data.get('longitude')
+    
+    # Process latitude and longitude here
+    
+    return 'Location received successfully'
 
 
 @app.route('/adduserdata1', methods=['get'])  # Specify that this route handles POST requests
@@ -136,7 +144,7 @@ def methodcontact():
 
 @app.route('/getLocation')
 def methodcontact():
-  return render_template("contact.html")
+  return render_template("getLocation.html")
 
 # return " Welcome AIML Jan24 f1"
 
