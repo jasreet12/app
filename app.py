@@ -134,7 +134,7 @@ def methodpredict():
   bhk = request.form.get("bhk")
   bath = request.form.get("bath")
   pp = predictprice(loc, sqft, bhk, bath).round(3)
-  return render_template("project.html", pprice=pp)
+  return render_template("project.html", pprice=pp ,locations = df.columns[5:] )
 
 
 @app.route('/contact')
