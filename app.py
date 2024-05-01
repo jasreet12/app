@@ -29,7 +29,7 @@ def create_database():
 
   # Close the connection
   conn.close()
-create_database()
+# create_database()
 ##############
 file ="https://raw.githubusercontent.com/sarwansingh/Python/master/ClassExamples/data/Bengaluru_House_Data_clean.csv"
 df = pd.read_csv(file)
