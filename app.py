@@ -65,7 +65,6 @@ def showdata():
 
 
 
-
 @app.route('/adduserdata1', methods=['get'])  # Specify that this route handles POST requests
 def adduserdata1():
     name = request.form.get("name")
