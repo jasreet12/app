@@ -48,18 +48,6 @@ lrmodel.fit(X,Y)
 
 
 
-# @app.route('/showdata')
-# def showdata():
-#   con  = sqlite3.connect("myDB")  # connect sms database
-#   con.row_factory = sqlite3.Row  # create object of Row
-#   cur = con.cursor()             # create cursor object, which will hold records 
-#                       # being fetched from database. 
- 
-#   cur.execute( "select * from attendance") 
-#   rows = cur.fetchall()          # all the data pulled from database is stored in rows object 
-#   con.close ()
-#   return render_template("showData.html", data=rows) 
-
 @app.route('/showdata')
 def showdata():
     con = sqlite3.connect("myDB")
