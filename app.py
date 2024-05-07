@@ -69,14 +69,6 @@ def showdata():
 @app.route('/adduserdata1', methods=['get'])  # Specify that this route handles POST requests
 def adduserdata1():
     name = request.form.get("name")
-#     # name = "nikshep"
-#     latitude = request.get('latitude')
-#     longitude = request.get('longitude')
-
-#     # Process latitude and longitude here
-#     print("Latitude:", latitude)
-#     print("Longitude:", longitude)
-#     print(latitude, longitude)
     con = sqlite3.connect("myDB")  
     con.row_factory = sqlite3.Row  
     cur = con.cursor()             
@@ -125,13 +117,19 @@ def methodpredict():
   return render_template("project.html", pprice=pp ,locations = df.columns[5:] )
 
 
+
+
 @app.route('/contact')
 def methodcontact():
   return render_template("contact.html")
 
+
+
 @app.route('/getlocation')
 def methodLocation():
   return render_template("getLocation.html")
+
+
 
 # return " Welcome AIML Jan24 f1"
 
