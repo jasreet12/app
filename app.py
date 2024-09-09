@@ -33,7 +33,7 @@ def create_database():
 
 
 
-
+# house price prediction -1st part
 ##############
 file ="https://raw.githubusercontent.com/sarwansingh/Python/master/ClassExamples/data/Bengaluru_House_Data_clean.csv"
 df = pd.read_csv(file)
@@ -42,6 +42,8 @@ Y = df.price
 
 lrmodel = LinearRegression()
 lrmodel.fit(X,Y)
+
+#1st part end
 ######### get all locations in the list
 # collist = df.columns
 # loclist = []
@@ -83,7 +85,7 @@ def adduserdata1():
   
     return render_template('index.html')
 
-
+# house price prediction -2nd part
 
 def predictprice(location,sqft,bath,bhk):
   '''
@@ -119,7 +121,7 @@ def methodpredict():
   pp = predictprice(loc, sqft, bath, bhk).round(3)
   return render_template("project.html", pprice=pp ,locations = df.columns[5:] )
 
-
+# 2nd part end
 
 
 @app.route('/contact')
