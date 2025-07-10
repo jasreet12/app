@@ -1,50 +1,117 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>House Price Prediction</title>
 
-{% block title %}  
- AIML Jan2024
-{% endblock %}
-
-{% block mainarea %}
-  <h1>
-    Welcome to AIML
-  </h1>
-<a href="https://huggingface.co/spaces/nikshep01/multipleFaceDetection">Mark your attendance</a>
-
-<script>
-    window.onload = function() {
-        getLocation();
-    };
-
-    function getLocation() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(sendLocation, handleLocationError);
-        } else {
-            alert("Geolocation is not supported by this browser.");
-        }
+  <!-- Bootstrap 4 -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  
+  <style>
+    body {
+      background-color: #e9ecef; /* Light gray background */
     }
-
-    function sendLocation(position) {
-        var latitude = position.coords.latitude;
-        var longitude = position.coords.longitude;
-
-        // Construct the URL with latitude and longitude as query parameters
-        var url = `/adduserdata1?latitude=${latitude}&longitude=${longitude}`;
-
-        fetch(url, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-        })
-        .then(response => response.text())
-        .then(data => console.log(data))
-        .catch(error => console.error('Error:', error));
+    .header {
+      background-color: #6f42c1; /* Purple header */
+      color: white;
+      padding: 20px 0;
+      text-align: center;
     }
-
-    function handleLocationError(error) {
-        console.error("Error getting location:", error.message);
+    .footer {
+      background-color: #343a40; /* Dark gray footer */
+      color: white;
+      padding: 10px 0;
+      text-align: center;
+      position: relative;
+      bottom: 0;
+      width: 100%;
     }
-</script>
+    .card {
+      border: 1px solid #6f42c1; /* Purple border for the card */
+    }
+    .btn-primary {
+      background-color: #ff6f61; /* Coral button color */
+      border-color: #ff6f61; /* Coral border color */
+    }
+    .alert {
+      background-color: #d1ecf1; /* Light blue alert background */
+      color: #0c5460; /* Dark blue alert text */
+    }
+  </style>
+</head>
+<body>
 
+  <div class="header">
+    <h1>Welcome to House Price Prediction</h1>
+    <p>Get an estimate of your house price based on various factors!</p>
+  </div>
 
-{% endblock %}
+  <div class="container mt-5 mb-5">
+    <div class="card shadow p-4">
+      <h2 class="text-center mb-4">
+        <i class="fas fa-home"></i> House Price Prediction
+      </h2>
+      <hr />
+
+      <form action="/predict" method="POST">
+        <!-- Location -->
+        <div class="form-group">
+          <label for="location"><i class="fas fa-map-marker-alt"></i> Location:</label>
+          <select name="loc" class="form-control" required>
+            {% for loc in locations %}
+            <option>{{ loc }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <!-- Size -->
+        <div class="form-group">
+          <label for="size"><i class="fas fa-ruler-combined"></i> Size (sqft):</label>
+          <input type="text" name="size" class="form-control" placeholder="Enter area in sqft" required />
+        </div>
+
+        <!-- BHK -->
+        <div class="form-group">
+          <label for="bhk"><i class="fas fa-bed"></i> BHK (Bedrooms):</label>
+          <select name="bhk" class="form-control" required>
+            {% for i in range(1, 9) %}
+            <option>{{ i }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <!-- Bathrooms -->
+        <div class="form-group">
+          <label for="bath"><i class="fas fa-bath"></i> Bathrooms:</label>
+          <select name="bath" class="form-control" required>
+            {% for i in range(1, 6) %}
+            <option>{{ i }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <!-- Submit -->
+        <div class="text-center mt-4">
+          <button type="submit" class="btn btn-primary">
+            <i class="fas fa-calculator"></i> Predict Price
+          </button>
+        </div>
+      </form>
+
+      {% if pprice %}
+      <div class="alert alert-success text-center mt-4" role="alert">
+        <i class="fas fa-rupee-sign"></i> Estimated House Price: <strong>{{ pprice }}</strong> Lakhs
+      </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>&copy; 2025 House Price Prediction. All rights reserved.</p>
+  </div>
+
+</body>
+</html>
