@@ -30,7 +30,8 @@ def predict_price(location, sqft, bath, bhk):
     if loc_index >= 0:
         x[loc_index] = 1
 
-    return round(lrmodel.predict([x])[0], 3)
+    return round(lrmodel.predict([x])[0], 2)
+
 
 # 🔹 Home Page
 @app.route('/')
